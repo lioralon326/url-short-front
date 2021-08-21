@@ -8,11 +8,18 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {observer} from "mobx-react";
+import UrlsStore from "../stores/urlsStore";
 
 const useStyles = makeStyles({
     table: {
-        minWidth: 650,
+        marginTop: "5rem",
+        width:"40%",
+        marginLeft: "50%",
+        transform: "translateX(-50%)"
     },
+    tableHead:{
+        backgroundColor: "#01668f"
+    }
 });
 
 function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
@@ -27,31 +34,27 @@ const rows = [
     createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-const UrlsTable = () => {
+const UrlsTable = (props: any) => {
+    const store: UrlsStore = props.store;
+
     const classes = useStyles();
 
     return (
-        <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
-                <TableHead>
+        <TableContainer className={classes.table} component={Paper}>
+            <Table  aria-label="simple table">
+                <TableHead className={classes.tableHead}>
                     <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                        <TableCell>Compressed Url</TableCell>
+                        <TableCell align="right">Original Url</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.name}>
+                    {store.urls.map((row) => (
+                        <TableRow key={row[0]}>
                             <TableCell component="th" scope="row">
-                                {row.name}
+                                {row[0]}
                             </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.fat}</TableCell>
-                            <TableCell align="right">{row.carbs}</TableCell>
-                            <TableCell align="right">{row.protein}</TableCell>
+                            <TableCell align="right">{decodeURIComponent(row[1])}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

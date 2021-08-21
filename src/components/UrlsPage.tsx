@@ -46,7 +46,7 @@ const UrlsPage = (props: any) => {
             </Alert>
             }
             {(store && !store.loadError && !store.isLoading && store.urls.length > 0) &&
-                <UrlsTable />
+                <UrlsTable store={store}/>
             }
         </div>
     )
