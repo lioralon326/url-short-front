@@ -12,10 +12,7 @@ class UrlsApi extends BaseAPI {
     public create(domain: string) {
         return this.request({
                 method: "post",
-                url: "/",
-                params: {
-                    url: domain
-                }
+                url: `/${domain}`,
             }
         )
     }

@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import UrlsStore from "../stores/urlsStore";
+import CreateUrlStore from "../stores/createUrlStore";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -28,10 +29,14 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+export interface IAppHeaderProps{
+    urlsStore: UrlsStore;
+    createUrlStore: CreateUrlStore;
+}
 
-export default function ButtonAppBar(props: any) {
+export default function ButtonAppBar(props: IAppHeaderProps) {
 
-    const {store} = props;
+    const {urlsStore, createUrlStore} = props;
 
     const classes = useStyles();
 
@@ -45,8 +50,8 @@ export default function ButtonAppBar(props: any) {
                     <Typography variant="h6" className={classes.title}>
                         Url Shortcuts
                     </Typography>
-                    <Button variant="contained" color="secondary" startIcon={<RefreshIcon/>} className={classes.menuButton} onClick={() => store.reset()}>Refresh</Button>
-                    <Button variant="contained" startIcon={<AddIcon/>} className={classes.addButton}>Add Shortcut</Button>
+                    <Button variant="contained" color="secondary" startIcon={<RefreshIcon/>} className={classes.menuButton} onClick={() => urlsStore.reset()}>Refresh</Button>
+                    <Button variant="contained" startIcon={<AddIcon/>} className={classes.addButton} onClick={createUrlStore.open}>Add Url</Button>
                 </Toolbar>
             </AppBar>
         </div>
