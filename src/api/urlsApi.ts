@@ -18,4 +18,4 @@ class UrlsApi extends BaseAPI {
     }
 }
 
-export default new UrlsApi("http://localhost:8080")
+export default new UrlsApi(process.env.baseApi || "http://localhost:8080")
