@@ -23,7 +23,7 @@ const CreateUrlDialog = (props: ICreateUrlDialogProps) => {
                 <DialogTitle id="form-dialog-title">Create Url</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please Enter The Url You with to shorten
+                        Please Enter The Url You wish to shorten
                     </DialogContentText>
                     <TextField
                         autoFocus
@@ -40,7 +40,7 @@ const CreateUrlDialog = (props: ICreateUrlDialogProps) => {
                     <Button onClick={store.close} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={() => store.submit()} color="primary">
+                    <Button onClick={() => store.submit()} disabled={store.isSubmitting} color="primary">
                         Create
                     </Button>
                 </DialogActions>

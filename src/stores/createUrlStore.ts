@@ -6,6 +6,7 @@ export default class CreateUrlStore {
 
     @observable isOpen: boolean = false;
     @observable targetUrl: string = ""
+    @observable isSubmitting: boolean = false;
 
     private _urlsStore: UrlsStore;
 
@@ -22,6 +23,7 @@ export default class CreateUrlStore {
     @action
     public close = () => {
         this.isOpen = false;
+        this.isSubmitting = false;
     }
 
     @action
@@ -31,9 +33,11 @@ export default class CreateUrlStore {
 
     @action
     public submit(){
-        if(!this.targetUrl){
+        if(!this.targetUrl || this.isSubmitting){
             return;
         }
+
+        this.isSubmitting = true;
 
         UrlsApi.create(this.targetUrl)
             .then(() => this.updateUrl(""))
@@ -42,7 +46,6 @@ export default class CreateUrlStore {
             this._urlsStore.reset()
         })
     }
-
 
 }
 
